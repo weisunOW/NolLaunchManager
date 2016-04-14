@@ -941,6 +941,5 @@ namespace NolMultiLauncherAllServer
                 Console.WriteLine(HandleManager.MinimizeWindow(hWnd));
             }
         }
-
     }
 }

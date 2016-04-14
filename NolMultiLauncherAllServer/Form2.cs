@@ -94,21 +94,7 @@ namespace NolMultiLauncherAllServer
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (this.nolOpenedWindowHandles.Count > 0 && (this.listBox1.SelectedIndex >= 0 || this.listBox1.SelectedIndex <= this.listBox1.Items.Count))
-            {
-                int index = this.listBox1.SelectedIndex;
-                int procId = this.nolOpenedWindowHandles[index];
-                Process proc = Process.GetProcessById(procId);
-                IntPtr handle = proc.Handle;
-                Console.WriteLine(handle);
-                byte[] sBuffer = Helper.ReadMemory(handle, (int)MemoryLocations.NOL_SD_MEM_LOCATIONS.NOL_SD_MEM_SURENAME, (int)MemoryLocations.NOL_SD_MEM_LENGTH.NOL_SD_MEM_SURENAME_LENGTH);
-                byte[] fBuffer = Helper.ReadMemory(handle, (int)MemoryLocations.NOL_SD_MEM_LOCATIONS.NOL_SD_MEM_FIRSTNAME, (int)MemoryLocations.NOL_SD_MEM_LENGTH.NOL_SD_MEM_FIRSTNAME_LENGTH);
-                Console.WriteLine("姓名缓存长度: " + sBuffer.Length + " " + fBuffer.Length);
-                string surname = Encoding.Unicode.GetString(sBuffer);
-                string firstname = Encoding.Unicode.GetString(fBuffer);
-                Console.WriteLine("姓名："+surname+firstname);
-                this.label9.Text = surname + firstname;
-            }
+
         }
     }
 }
