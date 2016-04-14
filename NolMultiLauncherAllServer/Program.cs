@@ -1,9 +1,6 @@
 ﻿/*Nobunaga's Ambition Online MultiLauncher (信长之野望 Online 多开辅助工具)
  *The Nobunaga's Ambition Online's executable is never modified.
- *This program can be use for client applications connecting to all servers including
- *  1) Japan
- *  2) Taiwan
- *  3) and upcoming Chinese Mainland server
+ *This program can be use for client applications that it is used to connect to Taiwan server.
  * 
  *Copyright (C) 2013 张菁菁@烧津海贼众
 
@@ -180,7 +177,7 @@ namespace NolMultiLauncherAllServer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MainForm());
         }
     }
 }
