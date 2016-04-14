@@ -15,17 +15,17 @@ using System.IO;
 
 namespace NolMultiLauncherAllServer
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         private List<string> filePaths;
         private List<int> openedProcessId;
         Form2 form2;
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             InitForm();
         }
-        ~Form1() 
+        ~MainForm() 
         {
 
             Dispose(false);
