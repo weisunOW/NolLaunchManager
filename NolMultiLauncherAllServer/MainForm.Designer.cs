@@ -53,7 +53,7 @@
             this.teamStatusButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
             this.resolutionComboBox = new System.Windows.Forms.ComboBox();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.windowModePanel = new System.Windows.Forms.Panel();
             this.fullScreenModeRadioButton = new System.Windows.Forms.RadioButton();
             this.windowModeRadioButton = new System.Windows.Forms.RadioButton();
             this.label5 = new System.Windows.Forms.Label();
@@ -91,7 +91,7 @@
             this.windowAutoLayoutSettingGroup.SuspendLayout();
             this.layoutStylePanel.SuspendLayout();
             this.layoutDirectionPanel.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.windowModePanel.SuspendLayout();
             this.startUpSettingGroup.SuspendLayout();
             this.hdSettingGroup.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -393,15 +393,15 @@
             this.resolutionComboBox.Size = new System.Drawing.Size(82, 21);
             this.resolutionComboBox.TabIndex = 0;
             // 
-            // panel3
+            // windowModePanel
             // 
-            this.panel3.Controls.Add(this.fullScreenModeRadioButton);
-            this.panel3.Controls.Add(this.windowModeRadioButton);
-            this.panel3.Location = new System.Drawing.Point(12, 17);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(65, 46);
-            this.panel3.TabIndex = 1;
+            this.windowModePanel.Controls.Add(this.fullScreenModeRadioButton);
+            this.windowModePanel.Controls.Add(this.windowModeRadioButton);
+            this.windowModePanel.Location = new System.Drawing.Point(12, 17);
+            this.windowModePanel.Margin = new System.Windows.Forms.Padding(2);
+            this.windowModePanel.Name = "windowModePanel";
+            this.windowModePanel.Size = new System.Drawing.Size(65, 46);
+            this.windowModePanel.TabIndex = 1;
             // 
             // fullScreenModeRadioButton
             // 
@@ -478,7 +478,7 @@
             // 
             this.startUpSettingGroup.Controls.Add(this.label5);
             this.startUpSettingGroup.Controls.Add(this.cgAnimationCheckbox);
-            this.startUpSettingGroup.Controls.Add(this.panel3);
+            this.startUpSettingGroup.Controls.Add(this.windowModePanel);
             this.startUpSettingGroup.Controls.Add(this.soudEffectCheckbox);
             this.startUpSettingGroup.Controls.Add(this.resolutionComboBox);
             this.startUpSettingGroup.Controls.Add(this.bgmCheckbox);
@@ -795,8 +795,8 @@
             this.layoutStylePanel.PerformLayout();
             this.layoutDirectionPanel.ResumeLayout(false);
             this.layoutDirectionPanel.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.windowModePanel.ResumeLayout(false);
+            this.windowModePanel.PerformLayout();
             this.startUpSettingGroup.ResumeLayout(false);
             this.startUpSettingGroup.PerformLayout();
             this.hdSettingGroup.ResumeLayout(false);
@@ -838,7 +838,7 @@
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.Panel layoutStylePanel;
         private System.Windows.Forms.Panel layoutDirectionPanel;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel windowModePanel;
         private System.Windows.Forms.RadioButton fullScreenModeRadioButton;
         private System.Windows.Forms.RadioButton windowModeRadioButton;
         private System.Windows.Forms.ComboBox resolutionComboBox;
