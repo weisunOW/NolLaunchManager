@@ -236,13 +236,15 @@ namespace NolMultiLauncherAllServer
         }
         private void setOtherSetting(string nolRegistryEntry)
         {
+            int flagOn = 0x00000001;
+            int flagOff = 0x0000000;
             string regSettingKey = nolRegistryEntry + "\\" + Program.NOL_REG_SETTING_NAME;
             // BGM
-            Registry.SetValue(regSettingKey, Program.NOL_REG_SETTING_BGM, ((Program.SETTINGS.LastBGM) ? 1 : 0));
+            Registry.SetValue(regSettingKey, Program.NOL_REG_SETTING_BGM, ((Program.SETTINGS.LastBGM) ? flagOn : flagOff));
             // SFX
-            Registry.SetValue(regSettingKey, Program.NOL_REG_SETTING_SE, ((Program.SETTINGS.LastSFX) ? 1 : 0));
+            Registry.SetValue(regSettingKey, Program.NOL_REG_SETTING_SE, ((Program.SETTINGS.LastSFX) ? flagOn : flagOff));
             // OP Movie
-            Registry.SetValue(regSettingKey, Program.NOL_REG_SETTING_MOIVE, ((Program.SETTINGS.LastOPMovie) ? 1 : 0));
+            Registry.SetValue(regSettingKey, Program.NOL_REG_SETTING_MOIVE, ((Program.SETTINGS.LastOPMovie) ? flagOn : flagOff));
         }
         private int[] CalculateTopLeftPosition(int numWnd, int currWndNum, String[] resolutionList, Screen s)
         {
