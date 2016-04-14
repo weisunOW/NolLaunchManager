@@ -46,9 +46,9 @@ namespace NolMultiLauncherAllServer
         private void InitForm() 
         {
             this.toolStripStatusLabel1.Text = "初始化中...";
-            this.radioButton5.Checked = true;
-            this.radioButton6.Checked = false;
-            this.checkBox1.Checked = true;
+            this.windowModeRadioButton.Checked = true;
+            this.fullScreenModeRadioButton.Checked = false;
+            this.enableAutoLayoutCheckbox.Checked = true;
             this.filePaths = new List<string>();
             this.openedProcessId = new List<int>();
             this.toolStripStatusLabel1.Text = "查找信长目录中...";
@@ -66,9 +66,9 @@ namespace NolMultiLauncherAllServer
                 getGameFolders();
                 foreach (string fp in filePaths)
                 {
-                    this.comboBox1.Items.Add(fp);
+                    this.nolExcutableCollectionComboBox.Items.Add(fp);
                 }
-                this.comboBox1.SelectedIndex = 0;
+                this.nolExcutableCollectionComboBox.SelectedIndex = 0;
             }
             catch(Exception ex)
             {
@@ -170,14 +170,14 @@ namespace NolMultiLauncherAllServer
                 resArr[9] = Convert.ToString(res[1]);
 
                 Screen s = Screen.PrimaryScreen;
-                if (this.radioButton1.Checked)
+                if (this.rightAndDownRadioButton.Checked)
                 {// 右下
                     int S_width = s.WorkingArea.Width;
                     int S_height = s.WorkingArea.Height;
                     resArr[0] = (S_width - res[0]).ToString();       //startup x
                     resArr[1] = (S_height - res[1]).ToString();      //startup y
                 }
-                if (this.radioButton2.Checked)
+                if (this.leftAndUpRadioButton.Checked)
                 {// 左上
                     resArr[0] = s.WorkingArea.Left.ToString();      //startup x
                     resArr[1] = s.WorkingArea.Top.ToString(); ;      //startup y
@@ -253,21 +253,21 @@ namespace NolMultiLauncherAllServer
             y = Int32.Parse(resolutionList[1]);
             int width = Int32.Parse(resolutionList[5]);
             int height = Int32.Parse(resolutionList[6]);
-            if (this.radioButton1.Checked && this.radioButton3.Checked)
+            if (this.rightAndDownRadioButton.Checked && this.windowLayerStyleRadioButton.Checked)
             {//右下往左上层叠
                 int diffFactor_width = (s.WorkingArea.Width - Int32.Parse(resolutionList[5])) / ((numWnd - 1) == 0 ? 1 : (numWnd - 1));
                 int diffFactor_Height = (s.WorkingArea.Height - Int32.Parse(resolutionList[6])) / ((numWnd - 1) == 0 ? 1 : (numWnd - 1));
                 x -= diffFactor_width;
                 y -= diffFactor_Height;
             }
-            else if (this.radioButton2.Checked && this.radioButton3.Checked)
+            else if (this.leftAndUpRadioButton.Checked && this.windowLayerStyleRadioButton.Checked)
             {//左上往右下层叠
                 int diffFactor_width = (s.WorkingArea.Width - Int32.Parse(resolutionList[5])) / ((numWnd - 1) == 0 ? 1 : (numWnd - 1));
                 int diffFactor_Height = (s.WorkingArea.Height - Int32.Parse(resolutionList[6])) / ((numWnd - 1) == 0 ? 1 : (numWnd - 1));
                 x += diffFactor_width;
                 y += diffFactor_Height;
             }
-            else if (this.radioButton1.Checked && this.radioButton4.Checked)
+            else if (this.rightAndDownRadioButton.Checked && this.windowTileStyleRadioButton.Checked)
             {// 右下往左上平铺
                 if ((s.WorkingArea.Width / width) >= numWnd)
                     x -= width;
@@ -301,7 +301,7 @@ namespace NolMultiLauncherAllServer
                     }
                 }
             }
-            else if (this.radioButton2.Checked && this.radioButton4.Checked)
+            else if (this.leftAndUpRadioButton.Checked && this.windowTileStyleRadioButton.Checked)
             { // 左上往右下平铺
                 if ((s.WorkingArea.Width / width) >= numWnd)
                     x += width;
@@ -422,7 +422,7 @@ namespace NolMultiLauncherAllServer
          */
         private bool isHighDefinition()
         {
-            string filePath = (string)this.comboBox1.SelectedItem;
+            string filePath = (string)this.nolExcutableCollectionComboBox.SelectedItem;
             string gameFolder = Path.GetDirectoryName(filePath);
             return (File.Exists(gameFolder + "\\" + Program.NOL_HD_PROCESS_NAME) &&
                    File.Exists(gameFolder + "\\" + Program.NOL_HD_LAUNCHER_NAME));
@@ -470,12 +470,12 @@ namespace NolMultiLauncherAllServer
                 return;
             else
             {
-                button2.Enabled = false;
+                teamStatusButton.Enabled = false;
                 form2 = new Form2(this.openedProcessId);
                 form2.FormClosed += new FormClosedEventHandler(
                     delegate(object _sender, FormClosedEventArgs _e) 
                     {
-                        button2.Enabled = true;
+                        teamStatusButton.Enabled = true;
                     });
                 form2.StartPosition = FormStartPosition.Manual;
                 form2.Location = new Point(this.Location.X+this.Width,this.Location.Y);
@@ -500,49 +500,49 @@ namespace NolMultiLauncherAllServer
                 int idx = this.filePaths.FindIndex(fp => fp == openFileDialog1.FileName); // Check if the file path has already been added to the list.
                 if (idx >= 0)
                 {
-                    this.comboBox1.SelectedIndex = idx;
+                    this.nolExcutableCollectionComboBox.SelectedIndex = idx;
                     this.toolStripStatusLabel1.Text = "文件已存在，请使用下拉菜单选取。";
                 }
                 else 
                 {
                     this.filePaths.Add(openFileDialog1.FileName);
-                    this.comboBox1.Items.Insert(0, openFileDialog1.FileName);
-                    this.comboBox1.SelectedIndex = 0;
+                    this.nolExcutableCollectionComboBox.Items.Insert(0, openFileDialog1.FileName);
+                    this.nolExcutableCollectionComboBox.SelectedIndex = 0;
                     this.toolStripStatusLabel1.Text = "文件已添加，请使用下拉菜单选取。";
                 }
             }
         }
         private void radioButton6_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.radioButton6.Checked)
+            if (this.fullScreenModeRadioButton.Checked)
             {
-                this.numericUpDown1.Value = 1;
-                this.numericUpDown1.Enabled = false;
-                this.groupBox1.Enabled = false;
-                string filePath = (string)this.comboBox1.SelectedItem;
+                this.windowNumberValueUpDown.Value = 1;
+                this.windowNumberValueUpDown.Enabled = false;
+                this.windowAutoLayoutSettingGroup.Enabled = false;
+                string filePath = (string)this.nolExcutableCollectionComboBox.SelectedItem;
                 string gameFolder = Path.GetDirectoryName(filePath);
                 this.changeResolutions(gameFolder);  
             }
         }
         private void radioButton5_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.radioButton5.Checked)
+            if (this.windowModeRadioButton.Checked)
             {
-                this.numericUpDown1.Enabled = true;
-                this.groupBox1.Enabled = true;
-                this.checkBox1.Checked = true;
-                this.radioButton1.Checked = true;
-                this.radioButton2.Checked = false;
-                this.radioButton3.Checked = true;
-                this.radioButton4.Checked = false;
-                string filePath = (string)this.comboBox1.SelectedItem;
+                this.windowNumberValueUpDown.Enabled = true;
+                this.windowAutoLayoutSettingGroup.Enabled = true;
+                this.enableAutoLayoutCheckbox.Checked = true;
+                this.rightAndDownRadioButton.Checked = true;
+                this.leftAndUpRadioButton.Checked = false;
+                this.windowLayerStyleRadioButton.Checked = true;
+                this.windowTileStyleRadioButton.Checked = false;
+                string filePath = (string)this.nolExcutableCollectionComboBox.SelectedItem;
                 string gameFolder = Path.GetDirectoryName(filePath);
                 this.changeResolutions(gameFolder);  
             }
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string filePath = (string)this.comboBox1.SelectedItem;
+            string filePath = (string)this.nolExcutableCollectionComboBox.SelectedItem;
             string gameFolder = Path.GetDirectoryName(filePath);
             this.toggleHDSettings(gameFolder);            
         }
@@ -555,33 +555,33 @@ namespace NolMultiLauncherAllServer
             if (File.Exists(gameFolder + "\\" + Program.NOL_HD_PROCESS_NAME) &&
                     File.Exists(gameFolder + "\\" + Program.NOL_HD_LAUNCHER_NAME))
             {
-                if (this.radioButton5.Checked)
+                if (this.windowModeRadioButton.Checked)
                 {// load HD windowed resolutions to combobox2
-                    this.comboBox2.Items.Clear();
-                    this.comboBox2.Items.AddRange(Program.NOL_HD_WINDOWED_RESOLUTIONS);
-                    this.comboBox2.SelectedIndex = 0;
+                    this.resolutionComboBox.Items.Clear();
+                    this.resolutionComboBox.Items.AddRange(Program.NOL_HD_WINDOWED_RESOLUTIONS);
+                    this.resolutionComboBox.SelectedIndex = 0;
                 }
-                else if (this.radioButton6.Checked)
+                else if (this.fullScreenModeRadioButton.Checked)
                 {// load HD fullscreen resolutions to combobox2
-                    this.comboBox2.Items.Clear();
-                    this.comboBox2.Items.AddRange(Program.NOL_HD_FULLSCREENED_RESOLUTIONS);
-                    this.comboBox2.SelectedIndex = 0;
+                    this.resolutionComboBox.Items.Clear();
+                    this.resolutionComboBox.Items.AddRange(Program.NOL_HD_FULLSCREENED_RESOLUTIONS);
+                    this.resolutionComboBox.SelectedIndex = 0;
                 }
             }
             else if (File.Exists(gameFolder + "\\" + Program.NOL_SD_PROCESS_NAME) &&
                      File.Exists(gameFolder + "\\" + Program.NOL_SD_LAUNCHER_NAME))
             {
-                if (this.radioButton5.Checked)
+                if (this.windowModeRadioButton.Checked)
                 {// load SD windowed resolutions to combobox2
-                    this.comboBox2.Items.Clear();
-                    this.comboBox2.Items.AddRange(Program.NOL_SD_WINDOWED_RESOLUTIONS);
-                    this.comboBox2.SelectedIndex = 0;
+                    this.resolutionComboBox.Items.Clear();
+                    this.resolutionComboBox.Items.AddRange(Program.NOL_SD_WINDOWED_RESOLUTIONS);
+                    this.resolutionComboBox.SelectedIndex = 0;
                 }
-                else if (this.radioButton6.Checked)
+                else if (this.fullScreenModeRadioButton.Checked)
                 {// load SD fullscreen resolutions to combobox2
-                    this.comboBox2.Items.Clear();
-                    this.comboBox2.Items.AddRange(Program.NOL_SD_FULLSCREENED_RESOLUTIONS);
-                    this.comboBox2.SelectedIndex = 0;
+                    this.resolutionComboBox.Items.Clear();
+                    this.resolutionComboBox.Items.AddRange(Program.NOL_SD_FULLSCREENED_RESOLUTIONS);
+                    this.resolutionComboBox.SelectedIndex = 0;
                 }
             }
         }
@@ -594,79 +594,79 @@ namespace NolMultiLauncherAllServer
             if (File.Exists(gameFolder + "\\" + Program.NOL_HD_PROCESS_NAME) &&
                     File.Exists(gameFolder + "\\" + Program.NOL_HD_LAUNCHER_NAME))
             {// Selected folder is a HD version 
-                groupBox3.Enabled = true;
-                radioButton7.Enabled = true;
-                radioButton8.Enabled = true;
-                radioButton9.Enabled = true;
-                radioButton10.Enabled = true;
-                radioButton11.Enabled = true;
-                radioButton12.Enabled = true;
-                radioButton13.Enabled = true;
-                radioButton14.Enabled = true;
-                radioButton15.Enabled = true;
-                radioButton16.Enabled = true;
-                radioButton17.Enabled = true;
-                radioButton18.Enabled = true;
+                hdSettingGroup.Enabled = true;
+                graphicalSettingLowRadioButton.Enabled = true;
+                graphicalButtonMediumRadioButton.Enabled = true;
+                graphicalSettingHighRadioButton.Enabled = true;
+                graphicalSettingExtremeRadioButton.Enabled = true;
+                waterEffectExtremeRadioButton.Enabled = true;
+                waterEffectHighRadioButton.Enabled = true;
+                waterEffectMediumRadioButton.Enabled = true;
+                waterEffectLowRadioButton.Enabled = true;
+                lightingEffectExtremeRadioButton.Enabled = true;
+                lightingEffectHighRadioButton.Enabled = true;
+                lightingEffectMediumRadioButton.Enabled = true;
+                lightingEffectLowRadioButton.Enabled = true;
                 this.toolStripStatusLabel1.Text = "高清版信长，可进行高清设置。";
-                if (this.radioButton5.Checked)
+                if (this.windowModeRadioButton.Checked)
                 {// load HD windowed resolutions to combobox2
-                    this.comboBox2.Items.Clear();
-                    this.comboBox2.Items.AddRange(Program.NOL_HD_WINDOWED_RESOLUTIONS);
-                    this.comboBox2.SelectedIndex = 0;
+                    this.resolutionComboBox.Items.Clear();
+                    this.resolutionComboBox.Items.AddRange(Program.NOL_HD_WINDOWED_RESOLUTIONS);
+                    this.resolutionComboBox.SelectedIndex = 0;
                 }
-                else if (this.radioButton6.Checked)
+                else if (this.fullScreenModeRadioButton.Checked)
                 {// load HD fullscreen resolutions to combobox2
-                    this.comboBox2.Items.Clear();
-                    this.comboBox2.Items.AddRange(Program.NOL_HD_FULLSCREENED_RESOLUTIONS);
-                    this.comboBox2.SelectedIndex = 0;
+                    this.resolutionComboBox.Items.Clear();
+                    this.resolutionComboBox.Items.AddRange(Program.NOL_HD_FULLSCREENED_RESOLUTIONS);
+                    this.resolutionComboBox.SelectedIndex = 0;
                 }
             }
             else if (File.Exists(gameFolder + "\\" + Program.NOL_SD_PROCESS_NAME) &&
                      File.Exists(gameFolder + "\\" + Program.NOL_SD_LAUNCHER_NAME))
             {// Selected folder is a SD version
                 // Uncheck all radio buttons in the group panel (7 to 18)
-                radioButton7.Checked = false;
-                radioButton8.Checked = false;
-                radioButton9.Checked = false;
-                radioButton10.Checked = false;
-                radioButton11.Checked = false;
-                radioButton12.Checked = false;
-                radioButton13.Checked = false;
-                radioButton14.Checked = false;
-                radioButton15.Checked = false;
-                radioButton16.Checked = false;
-                radioButton17.Checked = false;
-                radioButton18.Checked = false;
+                graphicalSettingLowRadioButton.Checked = false;
+                graphicalButtonMediumRadioButton.Checked = false;
+                graphicalSettingHighRadioButton.Checked = false;
+                graphicalSettingExtremeRadioButton.Checked = false;
+                waterEffectExtremeRadioButton.Checked = false;
+                waterEffectHighRadioButton.Checked = false;
+                waterEffectMediumRadioButton.Checked = false;
+                waterEffectLowRadioButton.Checked = false;
+                lightingEffectExtremeRadioButton.Checked = false;
+                lightingEffectHighRadioButton.Checked = false;
+                lightingEffectMediumRadioButton.Checked = false;
+                lightingEffectLowRadioButton.Checked = false;
 
                 // Disable all radio buttons in the group panel (7 to 18)
-                radioButton7.Enabled = false;
-                radioButton8.Enabled = false;
-                radioButton9.Enabled = false;
-                radioButton10.Enabled = false;
-                radioButton11.Enabled = false;
-                radioButton12.Enabled = false;
-                radioButton13.Enabled = false;
-                radioButton14.Enabled = false;
-                radioButton15.Enabled = false;
-                radioButton16.Enabled = false;
-                radioButton17.Enabled = false;
-                radioButton18.Enabled = false;
+                graphicalSettingLowRadioButton.Enabled = false;
+                graphicalButtonMediumRadioButton.Enabled = false;
+                graphicalSettingHighRadioButton.Enabled = false;
+                graphicalSettingExtremeRadioButton.Enabled = false;
+                waterEffectExtremeRadioButton.Enabled = false;
+                waterEffectHighRadioButton.Enabled = false;
+                waterEffectMediumRadioButton.Enabled = false;
+                waterEffectLowRadioButton.Enabled = false;
+                lightingEffectExtremeRadioButton.Enabled = false;
+                lightingEffectHighRadioButton.Enabled = false;
+                lightingEffectMediumRadioButton.Enabled = false;
+                lightingEffectLowRadioButton.Enabled = false;
                 
                 // Disable the group panel as well
-                groupBox3.Enabled = false;
+                hdSettingGroup.Enabled = false;
                 // Status
                 this.toolStripStatusLabel1.Text = "标清版信长，高清设置不可用。";
-                if (this.radioButton5.Checked)
+                if (this.windowModeRadioButton.Checked)
                 {// load SD windowed resolutions to combobox2
-                    this.comboBox2.Items.Clear();
-                    this.comboBox2.Items.AddRange(Program.NOL_SD_WINDOWED_RESOLUTIONS);
-                    this.comboBox2.SelectedIndex = 0;
+                    this.resolutionComboBox.Items.Clear();
+                    this.resolutionComboBox.Items.AddRange(Program.NOL_SD_WINDOWED_RESOLUTIONS);
+                    this.resolutionComboBox.SelectedIndex = 0;
                 }
-                else if (this.radioButton6.Checked)
+                else if (this.fullScreenModeRadioButton.Checked)
                 {// load SD fullscreen resolutions to combobox2
-                    this.comboBox2.Items.Clear();
-                    this.comboBox2.Items.AddRange(Program.NOL_SD_FULLSCREENED_RESOLUTIONS);
-                    this.comboBox2.SelectedIndex = 0;
+                    this.resolutionComboBox.Items.Clear();
+                    this.resolutionComboBox.Items.AddRange(Program.NOL_SD_FULLSCREENED_RESOLUTIONS);
+                    this.resolutionComboBox.SelectedIndex = 0;
                 }
             }
         }
@@ -711,150 +711,150 @@ namespace NolMultiLauncherAllServer
             Program.SETTINGS = Program.SETTINGS.ReadFromFile(fileName);
             for (int i = 0; i < Program.SETTINGS.LastLoadedClientFolders.Count; i++)
             {
-                if (!this.comboBox1.Items.Contains(Program.SETTINGS.LastLoadedClientFolders[i]))
+                if (!this.nolExcutableCollectionComboBox.Items.Contains(Program.SETTINGS.LastLoadedClientFolders[i]))
                 {
-                    this.comboBox1.Items.Add(Program.SETTINGS.LastLoadedClientFolders[i]);
+                    this.nolExcutableCollectionComboBox.Items.Add(Program.SETTINGS.LastLoadedClientFolders[i]);
                 }
             }
-            this.comboBox1.SelectedIndex = this.comboBox1.Items.IndexOf(Program.SETTINGS.LastSelectedClientFolder);
-            this.numericUpDown1.Value = Program.SETTINGS.LastNumWnd;
-            this.numericUpDown2.Value = Program.SETTINGS.LastDelay;
+            this.nolExcutableCollectionComboBox.SelectedIndex = this.nolExcutableCollectionComboBox.Items.IndexOf(Program.SETTINGS.LastSelectedClientFolder);
+            this.windowNumberValueUpDown.Value = Program.SETTINGS.LastNumWnd;
+            this.delayValueUpDown.Value = Program.SETTINGS.LastDelay;
             if (Program.SETTINGS.LastFullScreenToggle)
-                this.radioButton6.Checked = true;
+                this.fullScreenModeRadioButton.Checked = true;
             else
-                this.radioButton5.Checked = true;
-            this.checkBox2.Checked = Program.SETTINGS.LastBGM;
-            this.checkBox3.Checked = Program.SETTINGS.LastSFX;
-            this.checkBox4.Checked = Program.SETTINGS.LastOPMovie;
-            if (this.comboBox2.Items.Count > 0)
-                this.comboBox2.SelectedIndex = this.comboBox2.Items.IndexOf(Program.SETTINGS.LastResolution);
+                this.windowModeRadioButton.Checked = true;
+            this.bgmCheckbox.Checked = Program.SETTINGS.LastBGM;
+            this.soudEffectCheckbox.Checked = Program.SETTINGS.LastSFX;
+            this.cgAnimationCheckbox.Checked = Program.SETTINGS.LastOPMovie;
+            if (this.resolutionComboBox.Items.Count > 0)
+                this.resolutionComboBox.SelectedIndex = this.resolutionComboBox.Items.IndexOf(Program.SETTINGS.LastResolution);
             switch(Program.SETTINGS.LastShadowQuality)
             {
                 case 0:
-                    this.radioButton7.Checked = true;
+                    this.graphicalSettingLowRadioButton.Checked = true;
                     break;
                 case 1:
-                    this.radioButton8.Checked = true;
+                    this.graphicalButtonMediumRadioButton.Checked = true;
                     break;
                 case 2:
-                    this.radioButton9.Checked = true;
+                    this.graphicalSettingHighRadioButton.Checked = true;
                     break;
                 case 3:
-                    this.radioButton10.Checked = true;
+                    this.graphicalSettingExtremeRadioButton.Checked = true;
                     break;
                 default:
-                    this.radioButton8.Checked = true;
+                    this.graphicalButtonMediumRadioButton.Checked = true;
                     break;
             }
             switch (Program.SETTINGS.LastWaterQuality)
             {
                 case 0:
-                    this.radioButton14.Checked = true;
+                    this.waterEffectLowRadioButton.Checked = true;
                     break;
                 case 1:
-                    this.radioButton13.Checked = true;
+                    this.waterEffectMediumRadioButton.Checked = true;
                     break;
                 case 2:
-                    this.radioButton12.Checked = true;
+                    this.waterEffectHighRadioButton.Checked = true;
                     break;
                 case 3:
-                    this.radioButton11.Checked = true;
+                    this.waterEffectExtremeRadioButton.Checked = true;
                     break;
                 default:
-                    this.radioButton13.Checked = true;
+                    this.waterEffectMediumRadioButton.Checked = true;
                     break;
             }
             switch (Program.SETTINGS.LastLightingQuality)
             {
                 case 0:
-                    this.radioButton18.Checked = true;
+                    this.lightingEffectLowRadioButton.Checked = true;
                     break;
                 case 1:
-                    this.radioButton17.Checked = true;
+                    this.lightingEffectMediumRadioButton.Checked = true;
                     break;
                 case 2:
-                    this.radioButton16.Checked = true;
+                    this.lightingEffectHighRadioButton.Checked = true;
                     break;
                 case 3:
-                    this.radioButton15.Checked = true;
+                    this.lightingEffectExtremeRadioButton.Checked = true;
                     break;
                 default:
-                    this.radioButton17.Checked = true;
+                    this.lightingEffectMediumRadioButton.Checked = true;
                     break;
             }
-            this.checkBox1.Checked = Program.SETTINGS.LastAutoDistribution;
-            if (!this.checkBox1.Checked)
+            this.enableAutoLayoutCheckbox.Checked = Program.SETTINGS.LastAutoDistribution;
+            if (!this.enableAutoLayoutCheckbox.Checked)
             {
-                this.radioButton1.Checked = false;
-                this.radioButton2.Checked = false;
-                this.radioButton3.Checked = false;
-                this.radioButton4.Checked = false;
+                this.rightAndDownRadioButton.Checked = false;
+                this.leftAndUpRadioButton.Checked = false;
+                this.windowLayerStyleRadioButton.Checked = false;
+                this.windowTileStyleRadioButton.Checked = false;
             }
             switch (Program.SETTINGS.LastDistributionMethod)
             { 
                 case 0:
-                    this.radioButton1.Checked = true;
+                    this.rightAndDownRadioButton.Checked = true;
                     break;
                 case 1:
-                    this.radioButton2.Checked = true;
+                    this.leftAndUpRadioButton.Checked = true;
                     break;
                 default:
-                    this.radioButton1.Checked = true;
+                    this.rightAndDownRadioButton.Checked = true;
                     break;
             }
             switch (Program.SETTINGS.LastWindowAlignment)
             {
                 case 0:
-                    this.radioButton3.Checked = true;
+                    this.windowLayerStyleRadioButton.Checked = true;
                     break;
                 case 1:
-                    this.radioButton4.Checked = true;
+                    this.windowTileStyleRadioButton.Checked = true;
                     break;
                 default:
-                    this.radioButton3.Checked = true;
+                    this.windowLayerStyleRadioButton.Checked = true;
                     break;
             }
         }
         private void saveSettings() 
         {
-            Program.SETTINGS.LastSelectedClientFolder = this.comboBox1.Text;
-            for (int i = 0; i < this.comboBox1.Items.Count; i++)
+            Program.SETTINGS.LastSelectedClientFolder = this.nolExcutableCollectionComboBox.Text;
+            for (int i = 0; i < this.nolExcutableCollectionComboBox.Items.Count; i++)
             {
-                Program.SETTINGS.LastLoadedClientFolders.Add((string)this.comboBox1.Items[i]);
+                Program.SETTINGS.LastLoadedClientFolders.Add((string)this.nolExcutableCollectionComboBox.Items[i]);
             }
-            Program.SETTINGS.LastNumWnd = (int)this.numericUpDown1.Value;
-            Program.SETTINGS.LastDelay = (int)this.numericUpDown2.Value;
-            if (this.radioButton5.Checked)
+            Program.SETTINGS.LastNumWnd = (int)this.windowNumberValueUpDown.Value;
+            Program.SETTINGS.LastDelay = (int)this.delayValueUpDown.Value;
+            if (this.windowModeRadioButton.Checked)
                 Program.SETTINGS.LastFullScreenToggle = false;
-            else if (this.radioButton6.Checked)
+            else if (this.fullScreenModeRadioButton.Checked)
                 Program.SETTINGS.LastFullScreenToggle = true;
-            Program.SETTINGS.LastBGM = this.checkBox2.Checked;
-            Program.SETTINGS.LastSFX = this.checkBox3.Checked;
-            Program.SETTINGS.LastOPMovie = this.checkBox4.Checked;
-            Program.SETTINGS.LastResolution = this.comboBox2.Text;
+            Program.SETTINGS.LastBGM = this.bgmCheckbox.Checked;
+            Program.SETTINGS.LastSFX = this.soudEffectCheckbox.Checked;
+            Program.SETTINGS.LastOPMovie = this.cgAnimationCheckbox.Checked;
+            Program.SETTINGS.LastResolution = this.resolutionComboBox.Text;
             // Shadow quality
-            if (this.radioButton7.Checked) Program.SETTINGS.LastShadowQuality = 0;
-            else if (this.radioButton8.Checked) Program.SETTINGS.LastShadowQuality = 1;
-            else if (this.radioButton9.Checked) Program.SETTINGS.LastShadowQuality = 2;
+            if (this.graphicalSettingLowRadioButton.Checked) Program.SETTINGS.LastShadowQuality = 0;
+            else if (this.graphicalButtonMediumRadioButton.Checked) Program.SETTINGS.LastShadowQuality = 1;
+            else if (this.graphicalSettingHighRadioButton.Checked) Program.SETTINGS.LastShadowQuality = 2;
             else /*if (this.radioButton10.Checked)*/ Program.SETTINGS.LastShadowQuality = 3;
             // Water quality
-            if (this.radioButton14.Checked) Program.SETTINGS.LastWaterQuality = 0;
-            else if (this.radioButton13.Checked) Program.SETTINGS.LastWaterQuality = 1;
-            else if (this.radioButton12.Checked) Program.SETTINGS.LastWaterQuality = 2;
+            if (this.waterEffectLowRadioButton.Checked) Program.SETTINGS.LastWaterQuality = 0;
+            else if (this.waterEffectMediumRadioButton.Checked) Program.SETTINGS.LastWaterQuality = 1;
+            else if (this.waterEffectHighRadioButton.Checked) Program.SETTINGS.LastWaterQuality = 2;
             else /*if (this.radioButton11.Checked)*/ Program.SETTINGS.LastWaterQuality = 3;
             // Lighting quality
-            if (this.radioButton18.Checked) Program.SETTINGS.LastLightingQuality = 0;
-            else if (this.radioButton17.Checked) Program.SETTINGS.LastLightingQuality = 1;
-            else if (this.radioButton16.Checked) Program.SETTINGS.LastLightingQuality = 2;
+            if (this.lightingEffectLowRadioButton.Checked) Program.SETTINGS.LastLightingQuality = 0;
+            else if (this.lightingEffectMediumRadioButton.Checked) Program.SETTINGS.LastLightingQuality = 1;
+            else if (this.lightingEffectHighRadioButton.Checked) Program.SETTINGS.LastLightingQuality = 2;
             else /*if (this.radioButton15.Checked)*/ Program.SETTINGS.LastLightingQuality = 3;
-            Program.SETTINGS.LastAutoDistribution = this.checkBox1.Checked;
-            if (this.radioButton1.Checked)
+            Program.SETTINGS.LastAutoDistribution = this.enableAutoLayoutCheckbox.Checked;
+            if (this.rightAndDownRadioButton.Checked)
                 Program.SETTINGS.LastDistributionMethod = 0;
-            else if(this.radioButton2.Checked)
+            else if(this.leftAndUpRadioButton.Checked)
                 Program.SETTINGS.LastDistributionMethod = 1;
-            if (this.radioButton3.Checked)
+            if (this.windowLayerStyleRadioButton.Checked)
                 Program.SETTINGS.LastWindowAlignment = 0;
-            else if (this.radioButton4.Checked)
+            else if (this.windowTileStyleRadioButton.Checked)
                 Program.SETTINGS.LastWindowAlignment = 1;
 
             string pathToSave = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
@@ -864,23 +864,23 @@ namespace NolMultiLauncherAllServer
         }
         private void checkBox1_CheckStateChanged(object sender, EventArgs e)
         {
-            if (this.checkBox1.Checked)
+            if (this.enableAutoLayoutCheckbox.Checked)
             {
-                this.panel1.Enabled = true;
-                this.panel2.Enabled = true;
-                this.radioButton1.Checked = true;
-                this.radioButton2.Checked = false;
-                this.radioButton3.Checked = true;
-                this.radioButton4.Checked = false;
+                this.layoutDirectionPanel.Enabled = true;
+                this.layoutStylePanel.Enabled = true;
+                this.rightAndDownRadioButton.Checked = true;
+                this.leftAndUpRadioButton.Checked = false;
+                this.windowLayerStyleRadioButton.Checked = true;
+                this.windowTileStyleRadioButton.Checked = false;
             }
             else 
             {
-                this.panel1.Enabled = false;
-                this.panel2.Enabled = false;
-                this.radioButton1.Checked = false;
-                this.radioButton2.Checked = false;
-                this.radioButton3.Checked = false;
-                this.radioButton4.Checked = false;
+                this.layoutDirectionPanel.Enabled = false;
+                this.layoutStylePanel.Enabled = false;
+                this.rightAndDownRadioButton.Checked = false;
+                this.leftAndUpRadioButton.Checked = false;
+                this.windowLayerStyleRadioButton.Checked = false;
+                this.windowTileStyleRadioButton.Checked = false;
             }
         }
 
@@ -892,32 +892,32 @@ namespace NolMultiLauncherAllServer
 
         private void groupBox3_EnabledChanged(object sender, EventArgs e)
         {
-            if(!this.groupBox3.Enabled)
+            if(!this.hdSettingGroup.Enabled)
             {
-                radioButton7.Checked = false;
-                radioButton8.Checked = false;
-                radioButton9.Checked = false;
-                radioButton10.Checked = false;
-                radioButton11.Checked = false;
-                radioButton12.Checked = false;
-                radioButton13.Checked = false;
-                radioButton14.Checked = false;
-                radioButton15.Checked = false;
-                radioButton16.Checked = false;
-                radioButton17.Checked = false;
-                radioButton18.Checked = false;
+                graphicalSettingLowRadioButton.Checked = false;
+                graphicalButtonMediumRadioButton.Checked = false;
+                graphicalSettingHighRadioButton.Checked = false;
+                graphicalSettingExtremeRadioButton.Checked = false;
+                waterEffectExtremeRadioButton.Checked = false;
+                waterEffectHighRadioButton.Checked = false;
+                waterEffectMediumRadioButton.Checked = false;
+                waterEffectLowRadioButton.Checked = false;
+                lightingEffectExtremeRadioButton.Checked = false;
+                lightingEffectHighRadioButton.Checked = false;
+                lightingEffectMediumRadioButton.Checked = false;
+                lightingEffectLowRadioButton.Checked = false;
             }
         }
 
         private void groupBox1_EnabledChanged(object sender, EventArgs e)
         {
-            if (!this.groupBox1.Enabled)
+            if (!this.windowAutoLayoutSettingGroup.Enabled)
             {
-                this.checkBox1.Checked = false;
-                this.radioButton1.Checked = false;
-                this.radioButton2.Checked = false;
-                this.radioButton3.Checked = false;
-                this.radioButton4.Checked = false;
+                this.enableAutoLayoutCheckbox.Checked = false;
+                this.rightAndDownRadioButton.Checked = false;
+                this.leftAndUpRadioButton.Checked = false;
+                this.windowLayerStyleRadioButton.Checked = false;
+                this.windowTileStyleRadioButton.Checked = false;
             }
         }
 
