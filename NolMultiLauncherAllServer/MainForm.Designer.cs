@@ -56,18 +56,18 @@
             this.windowModePanel = new System.Windows.Forms.Panel();
             this.fullScreenModeRadioButton = new System.Windows.Forms.RadioButton();
             this.windowModeRadioButton = new System.Windows.Forms.RadioButton();
-            this.label5 = new System.Windows.Forms.Label();
+            this.resolutionLabel = new System.Windows.Forms.Label();
             this.bgmCheckbox = new System.Windows.Forms.CheckBox();
             this.soudEffectCheckbox = new System.Windows.Forms.CheckBox();
             this.cgAnimationCheckbox = new System.Windows.Forms.CheckBox();
             this.startUpSettingGroup = new System.Windows.Forms.GroupBox();
             this.hdSettingGroup = new System.Windows.Forms.GroupBox();
-            this.panel6 = new System.Windows.Forms.Panel();
+            this.lightingEffectPanel = new System.Windows.Forms.Panel();
             this.lightingEffectExtremeRadioButton = new System.Windows.Forms.RadioButton();
             this.lightingEffectHighRadioButton = new System.Windows.Forms.RadioButton();
             this.lightingEffectMediumRadioButton = new System.Windows.Forms.RadioButton();
             this.lightingEffectLowRadioButton = new System.Windows.Forms.RadioButton();
-            this.panel5 = new System.Windows.Forms.Panel();
+            this.waterEffectPanel = new System.Windows.Forms.Panel();
             this.waterEffectExtremeRadioButton = new System.Windows.Forms.RadioButton();
             this.waterEffectHighRadioButton = new System.Windows.Forms.RadioButton();
             this.waterEffectMediumRadioButton = new System.Windows.Forms.RadioButton();
@@ -75,12 +75,12 @@
             this.lightingEffectLabel = new System.Windows.Forms.Label();
             this.waterEffectSettingLabel = new System.Windows.Forms.Label();
             this.graphicalSettingLabel = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.graphicalSettingPanel = new System.Windows.Forms.Panel();
             this.graphicalSettingExtremeRadioButton = new System.Windows.Forms.RadioButton();
             this.graphicalSettingHighRadioButton = new System.Windows.Forms.RadioButton();
             this.graphicalButtonMediumRadioButton = new System.Windows.Forms.RadioButton();
             this.graphicalSettingLowRadioButton = new System.Windows.Forms.RadioButton();
-            this.label6 = new System.Windows.Forms.Label();
+            this.settingLegendLabel = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -94,9 +94,9 @@
             this.windowModePanel.SuspendLayout();
             this.startUpSettingGroup.SuspendLayout();
             this.hdSettingGroup.SuspendLayout();
-            this.panel6.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.lightingEffectPanel.SuspendLayout();
+            this.waterEffectPanel.SuspendLayout();
+            this.graphicalSettingPanel.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -431,15 +431,15 @@
             this.windowModeRadioButton.UseVisualStyleBackColor = true;
             this.windowModeRadioButton.CheckedChanged += new System.EventHandler(this.radioButton5_CheckedChanged);
             // 
-            // label5
+            // resolutionLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 74);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(43, 13);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "分辨率";
+            this.resolutionLabel.AutoSize = true;
+            this.resolutionLabel.Location = new System.Drawing.Point(10, 74);
+            this.resolutionLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.resolutionLabel.Name = "resolutionLabel";
+            this.resolutionLabel.Size = new System.Drawing.Size(43, 13);
+            this.resolutionLabel.TabIndex = 2;
+            this.resolutionLabel.Text = "分辨率";
             // 
             // bgmCheckbox
             // 
@@ -476,7 +476,7 @@
             // 
             // startUpSettingGroup
             // 
-            this.startUpSettingGroup.Controls.Add(this.label5);
+            this.startUpSettingGroup.Controls.Add(this.resolutionLabel);
             this.startUpSettingGroup.Controls.Add(this.cgAnimationCheckbox);
             this.startUpSettingGroup.Controls.Add(this.windowModePanel);
             this.startUpSettingGroup.Controls.Add(this.soudEffectCheckbox);
@@ -493,13 +493,13 @@
             // 
             // hdSettingGroup
             // 
-            this.hdSettingGroup.Controls.Add(this.panel6);
-            this.hdSettingGroup.Controls.Add(this.panel5);
+            this.hdSettingGroup.Controls.Add(this.lightingEffectPanel);
+            this.hdSettingGroup.Controls.Add(this.waterEffectPanel);
             this.hdSettingGroup.Controls.Add(this.lightingEffectLabel);
             this.hdSettingGroup.Controls.Add(this.waterEffectSettingLabel);
             this.hdSettingGroup.Controls.Add(this.graphicalSettingLabel);
-            this.hdSettingGroup.Controls.Add(this.panel4);
-            this.hdSettingGroup.Controls.Add(this.label6);
+            this.hdSettingGroup.Controls.Add(this.graphicalSettingPanel);
+            this.hdSettingGroup.Controls.Add(this.settingLegendLabel);
             this.hdSettingGroup.Location = new System.Drawing.Point(170, 86);
             this.hdSettingGroup.Margin = new System.Windows.Forms.Padding(2);
             this.hdSettingGroup.Name = "hdSettingGroup";
@@ -510,18 +510,18 @@
             this.hdSettingGroup.Text = "高清设置";
             this.hdSettingGroup.EnabledChanged += new System.EventHandler(this.groupBox3_EnabledChanged);
             // 
-            // panel6
+            // lightingEffectPanel
             // 
-            this.panel6.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.panel6.Controls.Add(this.lightingEffectExtremeRadioButton);
-            this.panel6.Controls.Add(this.lightingEffectHighRadioButton);
-            this.panel6.Controls.Add(this.lightingEffectMediumRadioButton);
-            this.panel6.Controls.Add(this.lightingEffectLowRadioButton);
-            this.panel6.Location = new System.Drawing.Point(34, 76);
-            this.panel6.Margin = new System.Windows.Forms.Padding(2);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(63, 15);
-            this.panel6.TabIndex = 8;
+            this.lightingEffectPanel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.lightingEffectPanel.Controls.Add(this.lightingEffectExtremeRadioButton);
+            this.lightingEffectPanel.Controls.Add(this.lightingEffectHighRadioButton);
+            this.lightingEffectPanel.Controls.Add(this.lightingEffectMediumRadioButton);
+            this.lightingEffectPanel.Controls.Add(this.lightingEffectLowRadioButton);
+            this.lightingEffectPanel.Location = new System.Drawing.Point(34, 76);
+            this.lightingEffectPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.lightingEffectPanel.Name = "lightingEffectPanel";
+            this.lightingEffectPanel.Size = new System.Drawing.Size(63, 15);
+            this.lightingEffectPanel.TabIndex = 8;
             // 
             // lightingEffectExtremeRadioButton
             // 
@@ -567,18 +567,18 @@
             this.lightingEffectLowRadioButton.TabStop = true;
             this.lightingEffectLowRadioButton.UseVisualStyleBackColor = true;
             // 
-            // panel5
+            // waterEffectPanel
             // 
-            this.panel5.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.panel5.Controls.Add(this.waterEffectExtremeRadioButton);
-            this.panel5.Controls.Add(this.waterEffectHighRadioButton);
-            this.panel5.Controls.Add(this.waterEffectMediumRadioButton);
-            this.panel5.Controls.Add(this.waterEffectLowRadioButton);
-            this.panel5.Location = new System.Drawing.Point(34, 54);
-            this.panel5.Margin = new System.Windows.Forms.Padding(2);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(63, 15);
-            this.panel5.TabIndex = 4;
+            this.waterEffectPanel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.waterEffectPanel.Controls.Add(this.waterEffectExtremeRadioButton);
+            this.waterEffectPanel.Controls.Add(this.waterEffectHighRadioButton);
+            this.waterEffectPanel.Controls.Add(this.waterEffectMediumRadioButton);
+            this.waterEffectPanel.Controls.Add(this.waterEffectLowRadioButton);
+            this.waterEffectPanel.Location = new System.Drawing.Point(34, 54);
+            this.waterEffectPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.waterEffectPanel.Name = "waterEffectPanel";
+            this.waterEffectPanel.Size = new System.Drawing.Size(63, 15);
+            this.waterEffectPanel.TabIndex = 4;
             // 
             // waterEffectExtremeRadioButton
             // 
@@ -654,18 +654,18 @@
             this.graphicalSettingLabel.TabIndex = 5;
             this.graphicalSettingLabel.Text = "图";
             // 
-            // panel4
+            // graphicalSettingPanel
             // 
-            this.panel4.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.panel4.Controls.Add(this.graphicalSettingExtremeRadioButton);
-            this.panel4.Controls.Add(this.graphicalSettingHighRadioButton);
-            this.panel4.Controls.Add(this.graphicalButtonMediumRadioButton);
-            this.panel4.Controls.Add(this.graphicalSettingLowRadioButton);
-            this.panel4.Location = new System.Drawing.Point(34, 33);
-            this.panel4.Margin = new System.Windows.Forms.Padding(2);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(63, 15);
-            this.panel4.TabIndex = 3;
+            this.graphicalSettingPanel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.graphicalSettingPanel.Controls.Add(this.graphicalSettingExtremeRadioButton);
+            this.graphicalSettingPanel.Controls.Add(this.graphicalSettingHighRadioButton);
+            this.graphicalSettingPanel.Controls.Add(this.graphicalButtonMediumRadioButton);
+            this.graphicalSettingPanel.Controls.Add(this.graphicalSettingLowRadioButton);
+            this.graphicalSettingPanel.Location = new System.Drawing.Point(34, 33);
+            this.graphicalSettingPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.graphicalSettingPanel.Name = "graphicalSettingPanel";
+            this.graphicalSettingPanel.Size = new System.Drawing.Size(63, 15);
+            this.graphicalSettingPanel.TabIndex = 3;
             // 
             // graphicalSettingExtremeRadioButton
             // 
@@ -711,15 +711,15 @@
             this.graphicalSettingLowRadioButton.TabStop = true;
             this.graphicalSettingLowRadioButton.UseVisualStyleBackColor = true;
             // 
-            // label6
+            // settingLegendLabel
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(34, 15);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(64, 13);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "低 中 高 极";
+            this.settingLegendLabel.AutoSize = true;
+            this.settingLegendLabel.Location = new System.Drawing.Point(34, 15);
+            this.settingLegendLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.settingLegendLabel.Name = "settingLegendLabel";
+            this.settingLegendLabel.Size = new System.Drawing.Size(64, 13);
+            this.settingLegendLabel.TabIndex = 0;
+            this.settingLegendLabel.Text = "低 中 高 极";
             // 
             // openFileDialog1
             // 
@@ -801,12 +801,12 @@
             this.startUpSettingGroup.PerformLayout();
             this.hdSettingGroup.ResumeLayout(false);
             this.hdSettingGroup.PerformLayout();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            this.lightingEffectPanel.ResumeLayout(false);
+            this.lightingEffectPanel.PerformLayout();
+            this.waterEffectPanel.ResumeLayout(false);
+            this.waterEffectPanel.PerformLayout();
+            this.graphicalSettingPanel.ResumeLayout(false);
+            this.graphicalSettingPanel.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -845,24 +845,24 @@
         private System.Windows.Forms.CheckBox cgAnimationCheckbox;
         private System.Windows.Forms.CheckBox soudEffectCheckbox;
         private System.Windows.Forms.CheckBox bgmCheckbox;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label resolutionLabel;
         private System.Windows.Forms.GroupBox startUpSettingGroup;
         private System.Windows.Forms.GroupBox hdSettingGroup;
         private System.Windows.Forms.Label lightingEffectLabel;
         private System.Windows.Forms.Label waterEffectSettingLabel;
         private System.Windows.Forms.Label graphicalSettingLabel;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel graphicalSettingPanel;
         private System.Windows.Forms.RadioButton graphicalSettingExtremeRadioButton;
         private System.Windows.Forms.RadioButton graphicalSettingHighRadioButton;
         private System.Windows.Forms.RadioButton graphicalButtonMediumRadioButton;
         private System.Windows.Forms.RadioButton graphicalSettingLowRadioButton;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Label settingLegendLabel;
+        private System.Windows.Forms.Panel lightingEffectPanel;
         private System.Windows.Forms.RadioButton lightingEffectExtremeRadioButton;
         private System.Windows.Forms.RadioButton lightingEffectHighRadioButton;
         private System.Windows.Forms.RadioButton lightingEffectMediumRadioButton;
         private System.Windows.Forms.RadioButton lightingEffectLowRadioButton;
-        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel waterEffectPanel;
         private System.Windows.Forms.RadioButton waterEffectExtremeRadioButton;
         private System.Windows.Forms.RadioButton waterEffectHighRadioButton;
         private System.Windows.Forms.RadioButton waterEffectMediumRadioButton;
